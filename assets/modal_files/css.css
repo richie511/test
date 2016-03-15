@@ -1,0 +1,6 @@
+@font-face {
+  font-family: 'Salsa';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Salsa-Regular'), url(https://fonts.gstatic.com/s/salsa/v6/51n5lWr4wZKcqZhtRDpI-g.woff2) format('woff2'), url(https://fonts.gstatic.com/s/salsa/v6/A4KcPjUX7Ams2Jqasy0vzQ.woff) format('woff');
+}

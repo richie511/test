@@ -1,0 +1,1181 @@
+<!DOCTYPE html>
+<!--[if lte IE 6]><html class="preIE7 preIE8 preIE9"><![endif]-->
+<!--[if IE 7]><html class="preIE8 preIE9"><![endif]-->
+<!--[if IE 8]><html class="preIE9"><![endif]-->
+<!--[if gte IE 9]><!--><html><!--<![endif]-->
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>Kelurahan Ratusima</title>
+  <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css" type="text/css">
+  <link rel="stylesheet" href="assets/style.css" type="text/css">
+  
+  <link rel="stylesheet" href="modal_files/bootstrap.css">
+  <link href="modal_files/css.css" rel="stylesheet" type="text/css">
+  <link href="modal_files/footable.css" rel="stylesheet" type="text/css"> 
+  <link href="modal_files/footable_002.css" rel="stylesheet" type="text/css">
+  <script src="./mask/urchin.js" type="text/javascript"></script>
+  <script src="http://tokodumai.com/jquery-1.7.2.min.js" type="text/javascript"></script>
+  <script src="./mask/urchin.js" type="text/javascript"></script>
+		<script type="text/javascript">
+			_uacct = "UA-67274-2";
+			urchinTracker();
+		</script>
+		<script type="text/javascript" src="./mask/debug.js"></script>
+		<script type="text/javascript" src="./mask/typecast_1.4.js"></script>
+		<script type="text/javascript" src="./mask/typecast.config.js"></script>
+		<script type="text/javascript">
+			window.onload = go;
+			function go(){
+				Typecast.Init();
+			}
+			
+			function reset(){
+				document.getElementById("#inputtext").value = "";
+			}
+			
+			$(document).on("mobileinit", function(){
+			  //apply overrides here
+			  $.mobile.allowCrossDomainPages = true;
+			  $.support.cors = true;
+			
+			});
+			
+			function ktp_simpan(){
+				var nama	= $("#ktp_nama").val();
+				var nik		= $("#ktp_nik").val();
+				var alamat	= $("#ktp_alamat").val();
+				var tgl		= $("#ktp_tgl").val();
+				var jam		= $("#ktp_jam").val();
+				var pilihan		= $('.ktp_pilih').is(":checked");
+				var pilihan_text		= $("input[name=ktp_pilih]:checked","#formktp").val();
+				
+				if(pilihan==false){
+					alert('Mohon Pilih pengurusan KRP, Apakah Pembuatan KTP Baru, Perpanjangan KTP, atau Penggantian KTP');
+					return false();
+				}
+				if(nama.length==0){
+					alert('Silahkan mengisi nama Anda');
+					$("#ktp_nama").focus();
+					return false();
+				}
+				if(nik.length==0){
+					alert('Silahkan mengisi NIK Anda');
+					$("#ktp_nik").focus();
+					return false();
+				}
+				if(alamat.length==0){
+					alert('Silahkan mengisi alamat Anda');
+					$("#ktp_alamat").focus();
+					return false();
+				}
+				if(tgl.length==0){
+					alert('Kapan diambil ?');
+					$("#ktp_jam").focus();
+					return false();
+				}
+				if(jam.length==0){
+					alert('Jam berapa diambil ?');
+					$("#ktp_jam").focus();
+					return false();
+				}
+				var url = "http://tokodumai.com/simpan_ktp.php?nik="+encodeURIComponent(nik)+"&nama="+encodeURIComponent(nama)+"&alamat="+encodeURIComponent(alamat)+"&tgl="+encodeURIComponent(tgl)+"&jam="+encodeURIComponent(jam)+"&pilihan="+encodeURIComponent(pilihan_text);
+				$.ajax({
+					//url		: "http://tokodumai.com/simpan.php?nik="+nik+"&nama="+nama+"&alamat="+alamat+"&tgl="+tgl+"&jam="+jam+"&pilihan="+pilihan_text,
+					url		: url,
+					type	: "GET",
+					crossDomain : true,
+					//data	: "nik="+nik+"&nama="+nama+"&alamat="+alamat+"&tgl="+tgl+"&jam="+jam+"&mode=ktp",
+					success: function(data) {
+						if (data == "Berhasil") {
+							$("#ktp_nama").val('');
+							$("#ktp_nik").val('');
+							$("#ktp_alamat").val('');
+							$("#ktp_tgl").val('');
+							$("#ktp_jam").val('');
+							$('#modal2').modal();
+						}
+						else {
+							$('#modalgagal').modal();
+						}
+						
+					}
+				});
+			}
+			
+			function srt_kematian(){
+				var srt_kematian_pelapor	= $("#srt_kematian_pelapor").val();
+				var srt_kematian_nik_jen		= $("#srt_kematian_nik_jen").val();
+				var srt_kematian_nama_jen	= $("#srt_kematian_nama_jen").val();
+				var srt_kematian_tgl_kematian		= $("#srt_kematian_tgl_kematian").val();
+				var srt_kematian_jam_ambil		= $("#srt_kematian_jam_ambil").val();
+				var srt_kematian_sebab		= $("#srt_kematian_sebab").val();
+				var srt_kematian_tempat		= $("#srt_kematian_tempat").val();
+				var srt_kematian_jam_kematian		= $("#srt_kematian_jam_kematian").val();
+				var srt_kematian_waktu_ambil		= $("#srt_kematian_waktu_ambil").val();
+				
+				if(srt_kematian_pelapor.length==0){
+					alert('Mohon isi nama Anda..');
+					$("#srt_kematian_pelapor").focus();
+					return false();
+				}
+				if(srt_kematian_nik_jen.length==0){
+					alert('Silahkan mengisi NIK Jenazah');
+					$("#srt_kematian_nik_jen").focus();
+					return false();
+				}
+				if(srt_kematian_nama_jen.length==0){
+					alert('Silahkan mengisi Nama Jenazah');
+					$("#srt_kematian_nama_jen").focus();
+					return false();
+				}
+				if(srt_kematian_tgl_kematian.length==0){
+					alert('Silahkan mengisi Tanggal Kematian Jenazah');
+					$("#srt_kematian_tgl_kematian").focus();
+					return false();
+				}
+				if(srt_kematian_jam_kematian.length==0){
+					alert('Silahkan mengisi Jam Kematian Jenazah');
+					$("#srt_kematian_jam_kematian").focus();
+					return false();
+				}
+				if(srt_kematian_sebab.length==0){
+					alert('Silahkan mengisi Sebab Kematian Jenazah');
+					$("#srt_kematian_sebab").focus();
+					return false();
+				}
+				if(srt_kematian_tempat.length==0){
+					alert('Silahkan mengisi tempat Kematian Jenazah');
+					$("#srt_kematian_tempat").focus();
+					return false();
+				}
+				if(srt_kematian_waktu_ambil.length==0){
+					alert('Kapan diambil ?');
+					$("#srt_kematian_waktu_ambil").focus();
+					return false();
+				}
+				if(srt_kematian_jam_ambil.length==0){
+					alert('Jam berapa diambil ?');
+					$("#srt_kematian_jam_ambil").focus();
+					return false();
+				}
+				var url = "http://tokodumai.com/simpan_kematian.php?pelapor="+encodeURIComponent(srt_kematian_pelapor)+"&nama="+encodeURIComponent(srt_kematian_nama_jen)+"&nik="+encodeURIComponent(srt_kematian_nik_jen)+"&tgl_kematian="+encodeURIComponent(srt_kematian_tgl_kematian)+"&sebab="+encodeURIComponent(srt_kematian_sebab)+"&tempat="+encodeURIComponent(srt_kematian_tempat)+"&jam_kematian="+encodeURIComponent(srt_kematian_jam_kematian)+"&waktu_ambil="+encodeURIComponent(srt_kematian_waktu_ambil)+"&jam_ambil="+encodeURIComponent(srt_kematian_jam_ambil);
+				$.ajax({
+					url		: url,
+					type	: "GET",
+					crossDomain : true,
+					success: function(data) {
+						if (data == "Berhasil") {
+							$("#srt_kematian_pelapor").val('');
+							$("#srt_kematian_nik_jen").val('');
+							$("#srt_kematian_nama_jen").val('');
+							$("#srt_kematian_tgl_kematian").val('');
+							$("#srt_kematian_jam_ambil").val('');
+							$("#srt_kematian_sebab").val('');
+							$("#srt_kematian_tempat").val('');
+							$("#srt_kematian_jam_kematian").val('');
+							$("#srt_kematian_waktu_ambil").val('');
+							$('#modal2').modal();
+						}
+						else {
+							$('#modalgagal').modal();
+						}
+						
+					}
+				});
+			}
+			
+			function srt_lahir(){
+				var srt_lahir_ayah	= $("#srt_lahir_ayah").val();
+				var srt_lahir_berat		= $("#srt_lahir_berat").val();
+				var srt_lahir_hari	= $("#srt_lahir_hari").val();
+				var srt_lahir_ibu		= $("#srt_lahir_ibu").val();
+				var srt_lahir_jam_ambil		= $("#srt_lahir_jam_ambil").val();
+				var srt_lahir_jk		= $("#srt_lahir_jk").val();
+				var srt_lahir_nama_bayi		= $("#srt_lahir_nama_bayi").val();
+				var srt_lahir_panjang		= $("#srt_lahir_panjang").val();
+				var srt_lahir_pelapor		= $("#srt_lahir_pelapor").val();
+				var srt_lahir_tanggal		= $("#srt_lahir_tanggal").val();
+				var srt_lahir_tempat		= $("#srt_lahir_tempat").val();
+				var srt_lahir_waktu_ambil		= $("#srt_lahir_waktu_ambil").val();
+				
+				if(srt_lahir_pelapor.length==0){
+					alert('Mohon isi nama Anda..');
+					$("#srt_lahir_pelapor").focus();
+					return false();
+				}
+				if(srt_lahir_nama_bayi.length==0){
+					alert('Silahkan mengisi Nama Bayi');
+					$("#srt_lahir_nama_bayi").focus();
+					return false();
+				}
+				if(srt_lahir_jk.length==0){
+					alert('Silahkan mengisi Jenis Kelamin Bayi');
+					$("#srt_lahir_jk").focus();
+					return false();
+				}
+				if(srt_lahir_tempat.length==0){
+					alert('Silahkan mengisi Tempat Kelahiran Bayi');
+					$("#srt_lahir_tempat").focus();
+					return false();
+				}
+				if(srt_lahir_hari.length==0){
+					alert('Silahkan mengisi Hari kelahiran bayi');
+					$("#srt_lahir_hari").focus();
+					return false();
+				}
+				if(srt_lahir_tanggal.length==0){
+					alert('Silahkan mengisi tanggal kelahiran bayi');
+					$("#srt_lahir_tanggal").focus();
+					return false();
+				}
+				if(srt_lahir_berat.length==0){
+					alert('Silahkan mengisi berat badan bayi');
+					$("#srt_lahir_berat").focus();
+					return false();
+				}
+				if(srt_lahir_panjang.length==0){
+					alert('Silahkan mengisi panjang badan bayi');
+					$("#srt_lahir_panjang").focus();
+					return false();
+				}
+				if(srt_lahir_ayah.length==0){
+					alert('Silahkan mengisi nama ayah bayi');
+					$("#srt_lahir_ayah").focus();
+					return false();
+				}
+				if(srt_lahir_ibu.length==0){
+					alert('Silahkan mengisi nama ibu bayi');
+					$("#srt_lahir_ibu").focus();
+					return false();
+				}
+				if(srt_lahir_waktu_ambil.length==0){
+					alert('Kapan diambil ?');
+					$("#srt_lahir_waktu_ambil").focus();
+					return false();
+				}
+				if(srt_lahir_jam_ambil.length==0){
+					alert('Jam berapa diambil ?');
+					$("#srt_lahir_jam_ambil").focus();
+					return false();
+				}
+				var url = "http://tokodumai.com/simpan_kelahiran.php?pelapor="+encodeURIComponent(srt_lahir_pelapor)+"&nama="+encodeURIComponent(srt_lahir_nama_bayi)+"&jk="+encodeURIComponent(srt_lahir_jk)+"&tempat="+encodeURIComponent(srt_lahir_tempat)+"&hari="+encodeURIComponent(srt_lahir_hari)+"&tanggal="+encodeURIComponent(srt_lahir_tanggal)+"&berat="+encodeURIComponent(srt_lahir_berat)+"&panjang="+encodeURIComponent(srt_lahir_panjang)+"&ayah="+encodeURIComponent(srt_lahir_ayah)+"&ibu="+encodeURIComponent(srt_lahir_ibu)+"&waktu_ambil="+encodeURIComponent(srt_lahir_waktu_ambil)+"&jam_ambil="+encodeURIComponent(srt_lahir_jam_ambil);
+				$.ajax({
+					url		: url,
+					type	: "GET",
+					crossDomain : true,
+					success: function(data) {
+						if (data == "Berhasil") {
+							$("#srt_lahir_ayah").val('');
+							$("#srt_lahir_berat").val('');
+							$("#srt_lahir_hari").val('');
+							$("#srt_lahir_ibu").val('');
+							$("#srt_lahir_jam_ambil").val('');
+							$("#srt_lahir_jk").val('');
+							$("#srt_lahir_nama_bayi").val('');
+							$("#srt_lahir_panjang").val('');
+							$("#srt_lahir_pelapor").val('');
+							$("#srt_lahir_tanggal").val('');
+							$("#srt_lahir_tempat").val('');
+							$("#srt_lahir_waktu_ambil").val('');
+							$('#modal2').modal();
+						}
+						else {
+							$('#modalgagal').modal();
+						}
+						
+					}
+				});
+			}
+			
+			function srt_pindah(){
+				var srt_pindah_nokk	= $("#srt_pindah_nokk").val();
+				var srt_pindah_agt1		= $("#srt_pindah_agt1").val();
+				var srt_pindah_agt2	= $("#srt_pindah_agt2").val();
+				var srt_pindah_agt3		= $("#srt_pindah_agt3").val();
+				var srt_pindah_agt4		= $("#srt_pindah_agt4").val();
+				var srt_pindah_agt5		= $("#srt_pindah_agt5").val();
+				var srt_pindah_jalan		= $("#srt_pindah_jalan").val();
+				var srt_pindah_kelurahan		= $("#srt_pindah_kelurahan").val();
+				var srt_pindah_kecamatan		= $("#srt_pindah_kecamatan").val();
+				var srt_pindah_kota		= $("#srt_pindah_kota").val();
+				var srt_pindah_provinsi		= $("#srt_pindah_provinsi").val();
+				var srt_pindah_waktu_ambil		= $("#srt_pindah_waktu_ambil").val();
+				var srt_pindah_jam_ambil		= $("#srt_pindah_jam_ambil").val();
+				
+				if(srt_pindah_nokk.length==0){
+					alert('Mohon isi Nomor KK..');
+					$("#srt_pindah_nokk").focus();
+					return false();
+				}
+				if(srt_pindah_agt1.length==0){
+					alert('Silahkan mengisi Nama Anggota 1');
+					$("#srt_pindah_agt1").focus();
+					return false();
+				}
+				if(srt_pindah_agt2.length==0){
+					alert('Silahkan mengisi Nama Anggota 2');
+					$("#srt_pindah_agt2").focus();
+					return false();
+				}
+				if(srt_pindah_agt3.length==0){
+					alert('Silahkan mengisi Nama Anggota 3');
+					$("#srt_pindah_agt3").focus();
+					return false();
+				}
+				if(srt_pindah_agt4.length==0){
+					alert('Silahkan mengisi Nama Anggota 4');
+					$("#srt_pindah_agt4").focus();
+					return false();
+				}
+				if(srt_pindah_agt5.length==0){
+					alert('Silahkan mengisi Nama Anggota 5');
+					$("#srt_pindah_agt5").focus();
+					return false();
+				}
+				
+				if(srt_pindah_jalan.length==0){
+					alert('Silahkan mengisi nama jalan');
+					$("#srt_pindah_jalan").focus();
+					return false();
+				}
+				if(srt_pindah_kelurahan.length==0){
+					alert('Silahkan mengisi nama kelurahan');
+					$("#srt_pindah_kelurahan").focus();
+					return false();
+				}
+				if(srt_pindah_kecamatan.length==0){
+					alert('Silahkan mengisi nama kecamatan');
+					$("#srt_pindah_kecamatan").focus();
+					return false();
+				}
+				if(srt_pindah_kota.length==0){
+					alert('Silahkan mengisi nama kota');
+					$("#srt_pindah_kota").focus();
+					return false();
+				}
+				if(srt_pindah_provinsi.length==0){
+					alert('Silahkan mengisi nama provinsi');
+					$("#srt_pindah_provinsi").focus();
+					return false();
+				}
+				if(srt_pindah_waktu_ambil.length==0){
+					alert('Kapan diambil ?');
+					$("#srt_pindah_waktu_ambil").focus();
+					return false();
+				}
+				if(srt_pindah_jam_ambil.length==0){
+					alert('Jam berapa diambil ?');
+					$("#srt_pindah_jam_ambil").focus();
+					return false();
+				}
+				var url = "http://tokodumai.com/simpan_srt_pindah.php?nokk="+encodeURIComponent(srt_pindah_nokk)+"&agt1="+encodeURIComponent(srt_pindah_agt1)+"&agt2="+encodeURIComponent(srt_pindah_agt2)+"&agt3="+encodeURIComponent(srt_pindah_agt3)+"&agt4="+encodeURIComponent(srt_pindah_agt4)+"&agt5="+encodeURIComponent(srt_pindah_agt5)+"&jalan="+encodeURIComponent(srt_pindah_jalan)+"&kelurahan="+encodeURIComponent(srt_pindah_kelurahan)+"&kecamatan="+encodeURIComponent(srt_pindah_kecamatan)+"&kota="+encodeURIComponent(srt_pindah_kota)+"&provinsi="+encodeURIComponent(srt_pindah_provinsi)+"&waktu_ambil="+encodeURIComponent(srt_pindah_waktu_ambil)+"&jam_ambil="+encodeURIComponent(srt_pindah_jam_ambil);
+				$.ajax({
+					url		: url,
+					type	: "GET",
+					crossDomain : true,
+					success: function(data) {
+						if (data == "Berhasil") {
+							$("#srt_pindah_nokk").val('');
+							$("#srt_pindah_agt1").val('');
+							$("#srt_pindah_agt2").val('');
+							$("#srt_pindah_agt3").val('');
+							$("#srt_pindah_agt4").val('');
+							$("#srt_pindah_agt5").val('');
+							$("#srt_pindah_jalan").val('');
+							$("#srt_pindah_kelurahan").val('');
+							$("#srt_pindah_kecamatan").val('');
+							$("#srt_pindah_kota").val('');
+							$("#srt_pindah_provinsi").val('');
+							$("#srt_pindah_waktu_ambil").val('');
+							$("#srt_pindah_jam_ambil").val('');
+							$('#modal2').modal();
+						}
+						else {
+							$('#modalgagal').modal();
+						}
+						
+					}
+				});
+			}
+			
+			function perubahan_data(){
+				var perubahan_data_nama	= $("#perubahan_data_nama").val();
+				var perubahan_data_nik		= $("#perubahan_data_nik").val();
+				var perubahan_data_pilihan	= $("#perubahan_data_pilihan").val();
+				var perubahan_data_baru		= $("#perubahan_data_baru").val();
+				var perubahan_data_lama		= $("#perubahan_data_lama").val();
+				var perubahan_data_waktu_ambil		= $("#perubahan_data_waktu_ambil").val();
+				var perubahan_data_jam_ambil		= $("#perubahan_data_jam_ambil").val();
+				
+				if(perubahan_data_nama.length==0){
+					alert('Mohon isi nama Anda..');
+					$("#perubahan_data_nama").focus();
+					return false();
+				}
+				if(perubahan_data_nik.length==0){
+					alert('Silahkan mengisi NIK Anda');
+					$("#perubahan_data_nik").focus();
+					return false();
+				}
+				if(perubahan_data_pilihan.length==0){
+					alert('Silahkan Pilih Perubahan data');
+					$("#perubahan_data_pilihan").focus();
+					return false();
+				}
+				if(perubahan_data_lama.length==0){
+					alert('Silahkan mengisi data yang saat ini ');
+					$("#perubahan_data_lama").focus();
+					return false();
+				}
+				if(perubahan_data_baru.length==0){
+					alert('Silahkan data yang baru/diinginkan');
+					$("#perubahan_data_baru").focus();
+					return false();
+				}
+				if(perubahan_data_waktu_ambil.length==0){
+					alert('Kapan diambil ?');
+					$("#perubahan_data_waktu_ambil").focus();
+					return false();
+				}
+				if(perubahan_data_jam_ambil.length==0){
+					alert('Jam berapa diambil ?');
+					$("#perubahan_data_jam_ambil").focus();
+					return false();
+				}
+				var url = "http://tokodumai.com/simpan_perubahan_data.php?nama="+encodeURIComponent(perubahan_data_nama)+"&nik="+encodeURIComponent(perubahan_data_nik)+"&pilihan="+encodeURIComponent(perubahan_data_pilihan)+"&baru="+encodeURIComponent(perubahan_data_baru)+"&lama="+encodeURIComponent(perubahan_data_lama)+"&waktu_ambil="+encodeURIComponent(perubahan_data_waktu_ambil)+"&jam_ambil="+encodeURIComponent(perubahan_data_jam_ambil);
+				$.ajax({
+					url		: url,
+					type	: "GET",
+					crossDomain : true,
+					success: function(data) {
+						if (data == "Berhasil") {
+								$("#perubahan_data_nama").val('');
+								$("#perubahan_data_nik").val('');
+								$("#perubahan_data_pilihan").val('');
+								$("#perubahan_data_baru").val('');
+								$("#perubahan_data_lama").val('');
+								$("#perubahan_data_waktu_ambil").val('');
+								$("#perubahan_data_jam_ambil").val('');
+							$('#modal2').modal();
+						}
+						else {
+							$('#modalgagal').modal();
+						}
+						
+					}
+				});
+			}
+		</script>
+  <style type="text/css">
+    #first-child
+    {
+      top:0;
+      left:0;
+      background-color: yellowgreen;
+    }
+    #second-child
+    {
+      top:0;
+      left:50%;
+      background-color: #E6537D;
+      color:black;
+    }
+    #third-child
+    {
+      top:50%;
+      left:0;
+      background-color: crimson;
+    }
+    #fourth-child
+    {
+      top:50%;
+      left:50%;
+      background-color: lightseagreen;
+      color:black;
+    }
+    .big-box
+    {
+      position: absolute;
+      width: 50%;
+      height: 50%;
+      opacity:1;
+      color:white;
+    }
+    .big-box h2
+    {
+      text-align: center;
+      margin-top: 20%;
+      padding: 20px;
+      width: 100%;
+      font-size: 1.8em;
+      letter-spacing: 2px;
+      font-weight: 700;
+      text-transform: uppercase;
+	     font-family:'Salsa',cursive;
+	     cursor:pointer;
+    } 
+    a
+    {
+      text-decoration:none ! important;
+    }
+  	h4
+  	{
+  	font-family:'Salsa',cursive;
+  	}
+    
+    .modal-dialog {
+      width: 100%;
+      height: 100%;
+      padding: 0;
+      margin:0;
+    }
+    .modal-content {
+      
+      height: 100%;
+      border-radius: 0;
+      color:white;
+      overflow:auto;
+    }
+    .modal-body p
+    {
+      margin: 0 auto;
+      padding-bottom: 15px;
+      font-size: 1.7em;
+      line-height: 1.8;
+      font-family:'Open Sans',sans-serif;
+    }
+    .modal-title
+    {
+      font-size: 3em;
+      font-weight: 300;
+      margin: 0 0 20px 0;
+    }
+    .modal-content-one
+    {
+      background-color:yellowgreen;
+    }
+    .modal-content-two
+    {
+      background-color:#E6537D;
+    }
+    .modal-content-three
+    {
+      background-color:crimson;
+    }
+    .modal-content-four
+    {
+      background-color:lightseagreen;
+    }
+    .modal-content-five
+    {
+      background-color:lightseagreen;
+    }
+    .thumbnail > img
+    {
+      height:200px;
+    }
+    .close
+    {
+      color:white ! important;
+      opacity:1.0;
+
+    }
+    .download{
+      background-color:#D12F2F;
+      text-transform: uppercase;
+      padding: 3px 12px 3px 12px;
+      -webkit-border-radius: 12px;
+      -moz-border-radius: 12px;
+      font-weight: bold;
+      text-decoration: none;
+      color: #fff;
+      font-size: 12px;
+      font-family: arial;
+    }
+    .demo{
+      background-color:#339933;
+      text-transform: uppercase;
+      padding: 3px 12px 3px 12px;
+      -webkit-border-radius: 12px;
+      -moz-border-radius: 12px;
+      font-weight: bold;
+      text-decoration: none;
+      color: #fff;
+      font-size: 12px;
+      font-family: arial;
+    }
+    .tutorial{
+      background-color:palevioletred;
+      text-transform: uppercase;
+      padding: 3px 12px 3px 12px;
+      -webkit-border-radius: 12px;
+      -moz-border-radius: 12px;
+      font-weight: bold;
+      text-decoration: none;
+      color: #fff;
+      font-size: 12px;
+      font-family: arial;
+    }
+    .article{
+      text-transform: uppercase;
+    }
+    .disabled{
+      text-decoration:line-through;
+    }
+    .tut-button{
+      background-color: crimson;
+      background-image: -webkit-linear-gradient(top, crimson, crimson);
+      background-image: -moz-linear-gradient(top,crimson,crimson);
+      /* display: inline-block; */
+      width: 100%;
+      margin-right: 40%;
+      margin-left: 40%;
+      font-size: 18px;
+      font-family: 'Meiryo UI';
+      color: #fff !important;
+      text-decoration: none !important;
+      padding: 5px 10px;
+      line-height: inherit;
+      overflow: hidden;
+      position: relative;
+      border-radius: 2px;
+    }
+  
+  @media screen and (max-width: 46.5em) 
+    {
+      .big-box h2
+      {
+        font-size:16px;
+        padding-left:0px;       
+      }
+      .tut-button
+      {
+        font-size:12px;
+        margin-left:30%;
+      }
+    }
+
+    @media screen and (max-width: 20.5em) 
+    {
+      .big-box h2
+      {
+        font-size:12px;
+        padding-left:0px;
+        margin-top:30%;
+      }
+      .tut-button
+      {
+        font-size:10px;
+        margin-left:20%;
+      }
+    }
+	
+	.inputtext {	
+		color:black;
+		border:1px solid #40A2D4;
+		cursor:pointer;
+		font-family:Arial, Helvetica, sans-serif;
+		font-size:14px;
+		font-weight:lighter;
+		padding:4px;
+		margin-top:5px;
+
+		-moz-border-radius:4px;
+		-webkit-border-radius:4px;
+		border-radius:4px;
+	}
+    </style>
+</head>
+<body>
+<!-- { inverse | static | collapsed | black | mbr-nav-collapse } -->
+<section class="menu-1 mbr-fixed-top mbr-nav-collapse" data-toggle="modal" data-target="#modal4">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                    <div class="brand">
+                        <a href="#"><img src="assets/images/logo.png" alt=""> Kota Dumai</a>
+						<nav></nav>
+                    </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- { center | inverse } -->
+<section class="hero-1 center inverse mbr-v-middle mbr-fullscreen mbr-parallax-background" style="background-image: url('assets/images/BG.jpg');">
+    <div>
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-7">
+                    <div class="hero">
+                        <h1>Selamat datang di kelurahan ratusima</h1><p><br></p><p>ratusima v.0.1</p>
+                    </div>
+                    <div class="group">
+                        
+                        
+                        
+                        <a class="btn btn-lg btn-info" data-toggle="modal" data-target="#modal3" style="">PILIH PENGURUSAN</a> 
+						<a class="btn btn-lg btn-success" href="#bantuan" style="">PERSYARATAN <br>& <br> KETENTUAN</a>
+						<a class="btn btn-lg btn-warning" href="tel:085389318310" style="">Telepon Kami</a>
+                    
+                    
+                    
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<!-- { center | inverse } -->
+<section class="hero-1 inverse mbr-v-middle mbr-fullscreen mbr-parallax-background" style="background-image: url('assets/images/BG.jpg');" id="bantuan">
+    <div>
+            <div class="mbr-overlay"></div>
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-7" >
+                    <div class="hero" style="text-align:left;background">
+                        <h2>SYARAT & KETENTUAN PELAYANAN ADM. KEPENDUDUKAN</h2>
+						<p> PENCETAKAN KTP BARU 
+						<ol>
+							<li>Surat Pengantar RT setempat</li>
+							<li>Kartu Keluarga (KK) lama asli</li>
+							<li>Kartu Tanda Penduduk (KTP) lama asli</li>
+							<li>Pas Photo Uk. 3 x 4 sebanyak 2 lbr</li>
+						</ol>
+                    </div>
+                </div>
+                <div class="col-sm-7">
+                    <div class="hero" style="text-align:left;">
+                        
+						<p>PENCETAKAN AKTE KELAHIRAN
+						<ol>
+							<li>Surat Pengantar RT setempat</li>
+							<li>Fhoto copy KK  sebanyak 2 lbr</li>
+							<li>Fhoto copy KTP orang tua sebanyak 3 lbr
+							<li>Fhoto copy Surat Nikah orang tua sebanyak 3 lbr
+							<li>Surat Keterangan Kelahiran oleh Bidan asli & fhoto copy sebanyak 3 lbr
+							<li>Formulir Isian
+						</ol>
+						</p>
+                    </div>
+                </div>
+                <div class="col-sm-7">
+                    <div class="hero" style="text-align:left;">
+						<p>PENCETAKAN SURAT KETERANGAN KEMATIAN
+						<ol>
+							<li>Surat Pengantar RT setempat</li>
+							<li>Fhoto copy KK sebanyak 2 lbr</li>
+							<li>Fhoto copy KTP sebanyak 2 lbr</li>
+						</ol>
+						</p>
+                    </div>
+                </div>
+				
+                <div class="col-sm-7">
+                    <div class="hero" style="text-align:left;">
+						<p>PEMBUATAN SURAT KETERANGAN PERUBAHAN DATA
+						<ol>
+							<li>Surat Pengantar RT setempat</li>
+							<li>Fhoto copy Surat Nikah sebanyak 2 lbr</li>
+							<li>Fhoto copy Ijazah sebanyak 2 lbr</li>
+							<li>Fhoto copy Akte Kelahiran sebanyak 2 lbr</li>
+						</ol>
+						</div>
+                </div>
+                <div class="col-sm-7">
+                    <div class="hero" style="text-align:left;">
+						<p>PELAYANAN SURAT PINDAH KELUAR
+						<ol>
+							<li>Surat Pengantar RT setempat</li>
+							<li>Kartu Keluarga (KK) asli & fhoto copy KK sebanyak 2 lbr</li></ol>
+					</div>
+                </div>
+                
+				<!-- Penutup-->
+                <div class="col-sm-7">
+                    <div class="group">
+                        <a href="" class="btn btn-info btn-lg">Ttd. Kelurahan Ratusima</a> 
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- { black | red | gray | left | center | right } -->
+<section class="content-1 extended center red" id="galeri" style="background-image: url('assets/images/BG.jpg');background-size:cover">
+    <div class="container">
+        <div class="row" >
+                <div class="col-sm-6" >
+                    <div >
+                        <h2>GALERI</h2><p>APLIKASI ANDROID KELURAHAN RATUSIMA INI ADALAH SUATU CARA KAMI UNTUK LEBIH MENDEKATKAN DIRI KEPADA MASYARAKAT.</p>
+                    </div>
+                </div>
+                <div class="col-sm-6 img">
+                    <img src="assets/images/IMG_9984X copy.jpg" alt="">
+                </div>
+                <div class="col-sm-6 img" style="color:red;">
+                    <img src="assets/images/lurah.jpg" alt=""><B><u>Fachrudimas, M.si</u></B><br>Kepala Kelurahan Ratusima Dumai
+                </div>
+        </div>
+    </div>
+</section>
+
+<section class="msgbox-1 black" id="formktp" >
+    <div class="container">
+        <div class="row">
+                <div class="col-sm-8">
+                    <h2>KTP</h2><p><b>Berikut ini adalah Form Pengurusan KTP</b></p>
+                </div>
+                <div class="col-sm-4">
+                    <table >
+						<tr align="left">
+							<td width ="30%">Nama</td><td><input type="text" class="inputtext" id="ktp_nama" placeholder = "Nama Anda"></td>
+						</tr>
+						<tr align="left">
+							<td>NIK</td><td><input type="number" id="ktp_nik" class="inputtext" placeholder = "NIK KTP "></td>
+						</tr>
+						<tr align="left">
+							<td>Alamat</td><td><input type="text" id="ktp_alamat" class="inputtext" placeholder = "Alamat Anda"></td>
+						</tr>
+						<tr align="left">
+							<td></td><td><input type="radio" name="ktp_pilih" class="ktp_pilih" value="Baru"> Baru <BR> <input type="radio"  class="ktp_pilih" value="Perpanjangan" name="ktp_pilih"> Perpanjangan <BR> <input value="Penggantian"  class="ktp_pilih" type="radio" name="ktp_pilih"> Penggantian </td>
+						</tr>
+						<tr align="left">
+							<td colspan = "2"><hr></td>
+						</tr>
+						<tr align="left">
+							<td>Waktu Pengambilan</td><td><input placeholder = "ex:Siang" class="inputtext" id="ktp_tgl" type='text' size="8" maxlength="10"> Jam <input class='inputtext' id="ktp_jam" placeholder = "ex:13:00" type='text' size="3" maxlength="6"> </td>
+						</tr>
+						<tr align="left">
+							<!-- <td></td><td><input type="submit" data-toggle="modal" data-target= "#modal2" onclick="reset();" id="inputtext"  value="Kirim"></td> -->
+							<td></td><td><button type="button" class="inputtext"  onclick="ktp_simpan()"  >Kirim</button></td>
+						</tr>
+					</table>
+                </div>
+        </div>
+    </div>
+</section>
+<section class="msgbox-1 black" id="formkematian">
+    <div class="container">
+        <div class="row">
+                <div class="col-sm-8">
+                    <h2>Surat Keterangan Kematian</h2><p><b>Berikut ini adalah Form Pengurusan Surat Keterangan Kematian</b></p>
+                </div>
+                <div class="col-sm-4">
+                    <table >
+						<tr align="left">
+							<td width ="30%">Nama Pelapor</td><td><input type="text" class="inputtext" id="srt_kematian_pelapor" placeholder = "Nama Anda"></td>
+						</tr>
+					</table>
+					<p><b>JENAZAH</b></p>
+					<table>
+						<tr align="left">
+							<td width ="30%">Nama</td><td><input type="text" class="inputtext" id="srt_kematian_nama_jen" placeholder = "Nama Jenazah"></td>
+						</tr>
+						<tr align="left">
+							<td width ="30%">Nik</td><td><input type="number" class="inputtext" id="srt_kematian_nik_jen" placeholder = "NIK Jenazah"></td>
+						</tr>
+						<tr align="left">
+							<td>Tanggal Kematian</td><td><input id="srt_kematian_tgl_kematian" class="inputtext" type='text' placeholder = "Tanggal Kematian"  /></td>
+						</tr>
+						<tr align="left">
+							<td>Pukul</td><td><input  id="srt_kematian_jam_kematian" class="inputtext" type='text' placeholder = "Pukul" /> </td>
+						</tr>
+						<tr align="left">
+							<td width ="30%">Sebab</td><td><input type="text"id="srt_kematian_sebab" class="inputtext" placeholder = "Penyebab Kematian"></td>
+						</tr>
+						<tr align="left">
+							<td >Tempat</td><td><input type="text" id="srt_kematian_tempat" class="inputtext" placeholder = "Tempat Kematian"></td>
+						</tr>
+						<tr align="left">
+							<td colspan = "2"><hr></td>
+						</tr>
+						<tr align="left">
+							<td>Waktu Pengambilan</td><td><input class="inputtext" id="srt_kematian_waktu_ambil" placeholder = "ex : Siang" class="inputtext" type='text' size="8" maxlength="10"> Jam <input class="inputtext" id="srt_kematian_jam_ambil" placeholder = "ex : 11.00" type='text' size="3" class="inputtext" maxlength="6"> </td>
+						</tr>
+						<tr align="left">
+							<td></td><td><button type="button"  onclick="srt_kematian()" class="inputtext" >Kirim</button></td>
+						</tr>
+					</table>
+                </div>
+        </div>
+    </div>
+</section>
+<section class="msgbox-1 black" id="formkelahiran">
+    <div class="container">
+        <div class="row">
+                <div class="col-sm-8">
+                    <h2>Surat Keterangan Kelahiran</h2><p><b>Berikut ini adalah Form Pengurusan Surat Keterangan Kelahiran</b></p>
+                </div>
+                <div class="col-sm-4">
+                    <table >
+						<tr align="left">
+							<td width ="30%">Nama Pelapor</td><td><input type="text" class="inputtext" id="srt_lahir_pelapor" placeholder = "Isi Dengan Nama Anda"></td>
+						</tr>
+					</table>
+					<p><b>BAYI / ANAK</b></p>
+					<table>
+						<tr align="left">
+							<td width ="30%">Nama Bayi</td><td><input type="text" class="inputtext" id="srt_lahir_nama_bayi" placeholder = "Nama Bayi"></td>
+						</tr>
+						<tr align="left">
+							<td width ="30%">Jenis Kelamin</td><td><input type="text" class="inputtext" id="srt_lahir_jk" placeholder = "Jenis Kelamin"/></td>
+						</tr>
+						<tr align="left">
+							<td width ="30%">Tempat Kelahiran</td><td><input class="inputtext" type="text" id="srt_lahir_tempat" placeholder = "Tempat Kelahiran"/></td>
+						</tr>
+						<tr align="left">
+							<td>Hari / Tanggal</td><td> <input class="inputtext" type="text" id="srt_lahir_hari" placeholder = "Hari " size = "7" maxlength="7"> / <input class="inputtext" id='srt_lahir_tanggal' placeholder = "Tanggal " type='text' size="8" maxlength="10" /></td>
+						</tr>
+						<tr align="left">
+							<td>Berat</td><td><input class="inputtext" id='srt_lahir_berat'  type='number' size="3" maxlength="3" placeholder = "Berat Bayi"/> </td>
+						</tr>
+						<tr align="left">
+							<td>Panjang</td><td><input class="inputtext" id='srt_lahir_panjang'  type='number' size="3" maxlength="3" placeholder = "Panjang bayi"/> </td>
+						</tr>
+						<tr align="left">
+							<td colspan = "2"><hr></td>
+						</tr>
+						<tr align="left">
+							<td >Nama Ayah</td><td><input class="inputtext" type="text" id="srt_lahir_ayah" placeholder = "Nama Ayah"/></td>
+						</tr>
+						<tr align="left">
+							<td >Nama Ibu</td><td><input class="inputtext" type="text" id="srt_lahir_ibu" placeholder = "Nama Ibu"/></td>
+						</tr>
+						<tr align="left">
+							<td colspan = "2"><hr></td>
+						</tr>
+						<tr align="left">
+							<td>Waktu Pengambilan</td><td><input placeholder = "ex : Pagi" class="inputtext" id='srt_lahir_waktu_ambil' type='text' size="8" maxlength="10"> Jam <input class="inputtext" id='srt_lahir_jam_ambil' placeholder = "ex:11.30" type='text' size="3" maxlength="6"> </td>
+						</tr>
+						<tr align="left">
+							<td></td><td><button type="button" class="inputtext" onclick="srt_lahir();"  >Kirim</button></td>
+						</tr>
+					</table>
+                </div>
+        </div>
+    </div>
+</section>
+<section class="msgbox-1 black" id="formpindah">
+    <div class="container">
+        <div class="row">
+                <div class="col-sm-8">
+                    <h2>Surat Keterangan Pindah</h2><p><b>Berikut ini adalah Form Pengurusan Surat Pindah</b></p>
+                </div>
+                <div class="col-sm-4">
+                    <table >
+						<tr align="left">
+							<td width ="30%">Nomor KK</td><td><input type="number" id="srt_pindah_nokk" class="inputtext" placeholder = "Isi Dengan No. KK Anda"></td>
+						</tr>
+					</table>
+					<p><b>Anggota Yang Pindah</b></p>
+					<table>
+						<tr align="left">
+							<td width ="30%"></td><td><input type="text" id="srt_pindah_agt1" class="inputtext" placeholder="Nama anggota yang pindah"></td>
+						</tr>
+						<tr align="left">
+							<td width ="30%"></td><td><input type="text" id="srt_pindah_agt2" class="inputtext"placeholder="Nama anggota yang pindah" /></td>
+						</tr>
+						<tr align="left">
+							<td width ="30%"></td><td><input type="text" id="srt_pindah_agt3" class="inputtext" placeholder="Nama anggota yang pindah"/></td>
+						</tr>
+						<tr align="left">
+							<td width ="30%"></td><td><input type="text" id="srt_pindah_agt4" class="inputtext" placeholder="Nama anggota yang pindah"/></td>
+						</tr>
+						<tr align="left">
+							<td width ="30%"></td><td><input type="text" id="srt_pindah_agt5" class="inputtext" placeholder="Nama anggota yang pindah"/></td>
+						</tr>
+					</table>
+					<p><b>Alamat Tujuan Pindah</b></p>
+					<table>
+						<tr align="left">
+							<td width ="30%">Nama Jalan</td><td><input type="text" id="srt_pindah_jalan" class="inputtext" placeholder = "Nama Jalan" /></td>
+						</tr>
+						<tr align="left">
+							<td>Kelurahan</td><td><input class="inputtext" id="srt_pindah_kelurahan" type='text' placeholder = "Nama Kelurahan"/> </td>
+						</tr>
+						<tr align="left">
+							<td>Kecamatan</td><td><input class="inputtext" id="srt_pindah_kecamatan" type='text' placeholder = "Nama Kecamatan" /> </td>
+						</tr>
+						<tr align="left">
+							<td >Kab / Kota</td><td><input type="text" id="srt_pindah_kota" class="inputtext" placeholder = "Nama Kabupaten/Kota"/></td>
+						</tr>
+						<tr align="left">
+							<td >Provinsi</td><td><input type="text" id="srt_pindah_provinsi" class="inputtext" placeholder = "Nama Provinsi"/></td>
+						</tr>
+						<tr align="left">
+							<td colspan = "2"><hr></td>
+						</tr>
+						<tr align="left">
+							<td>Waktu Pengambilan</td><td><input id="srt_pindah_waktu_ambil" class="inputtext" placeholder = "ex: Pagi" type='text' size="8" maxlength="10"> Jam <input id="srt_pindah_jam_ambil" class="inputtext" type='text' size="3" placeholder = "ex: 13.00" maxlength="6"> </td>
+						</tr>
+						<tr align="left">
+							<td></td><td><button type="submit" onclick="srt_pindah();" class="inputtext"  >Kirim</button></td>
+						</tr>
+					</table>
+                </div>
+        </div>
+    </div>
+</section>
+<section class="msgbox-1 black" id="formperubahan">
+    <div class="container">
+        <div class="row">
+                <div class="col-sm-8">
+                    <h2>Perubahan Data Kependudukan</h2><p><b>Berikut ini adalah Form Perubahan Data</b></p>
+                </div>
+                <div class="col-sm-4">
+				
+                    <table >
+						<tr align="left">
+							<td width ="30%">Nama</td><td><input type="text" class="inputtext" id="perubahan_data_nama" placeholder = "Nama Anda"></td>
+						</tr>
+						<tr align="left">
+							<td width ="30%">NIK</td><td><input type="number" id="perubahan_data_nik" class="inputtext" placeholder = "NIK KTP Anda"></td>
+						</tr>
+					</table>
+					<p><b>Perubahan Data</b></p>
+					<table>
+						<tr align="left">
+							<td width ="30%">Pilihan</td><td>
+								<select class="inputtext" id="perubahan_data_pilihan">
+									<option value="">--Pilih--</option>
+									<option>Nama</option>
+									<option>Alamat</option>
+									<option>Pendidikan</option>
+									<option>Tanggal Lahir</option>
+									<option>Pekerjaan</option>
+									<option>Jenis Kelamin</option>
+									<option>Status Perkawinan</option>
+									<option>Gol. Darah</option>
+								</select>
+							</td>
+						</tr>
+						<tr align="left">
+							<td width ="30%">Data Sekarang</td><td><input type="text" id="perubahan_data_lama" class="inputtext" placeholder = "Data Sekarang"/></td>
+						</tr>
+						<tr align="left">
+							<td width ="30%">Data yang diinginkan</td><td><input type="text" id="perubahan_data_baru" class="inputtext" placeholder = "Data yang diinginkan"/></td>
+						</tr>
+						<tr align="left">
+							<td colspan = "2"><hr></td>
+						</tr>
+						<tr align="left">
+							<td>Waktu Pengambilan</td><td><input id="perubahan_data_waktu_ambil" placeholder = "ex: Siang" class="inputtext" type='text' size="8" maxlength="10"> Jam <input id="perubahan_data_jam_ambil" class="inputtext" type='text' size="3" placeholder = "ex:12.30" maxlength="6"> </td>
+						</tr>
+						
+						<tr align="left">
+							<td></td><td><button type="button" onclick="perubahan_data();" class="inputtext">Kirim</button></td>
+						</tr>
+					</table>
+                </div>
+        </div>
+    </div>
+</section>
+<footer class="footer-1">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <p>KELURAHAN RATUSIMA © 2015</p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+          <!-- Modal -->
+          <div style="display: none;opacity:0.9;" class="modal fade" id="modal4" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+              <div class="modal-content modal-content-four">
+                <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+                  <h4 class="modal-title" id="myModalLabel" style="font-family:arial;font-weight:lihter;">Index</h4>
+                </div>
+                <div class="modal-body">
+                  <a href="#" class="btn btn-warning btn-lg" style="margin-bottom:5px;">Halaman Utama</a> 
+                  <a href="#bantuan" class="btn btn-warning btn-lg" style="margin-bottom:5px;">Bantuan</a> 
+                  <a href="#galeri" class="btn btn-warning btn-lg" style="margin-bottom:5px;">Galeri</a> 
+                  <a data-toggle="modal" data-target="#modal3" class="btn btn-warning btn-lg" style="margin-bottom:5px;">Unggah Pengurusan</a> 
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- Modal -->
+          <div style="display: none;opacity:0.9;" class="modal fade" id="modal3" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog" >
+              <div class="modal-content modal-content-four" style = "background:#4c6972;">
+                <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+                  <h4 class="modal-title" id="myModalLabel" style="font-family:arial;font-weight:lihter;">Index</h4>
+                </div>
+                <div class="modal-body">
+                  <a href="#formktp" class="btn btn-warning btn-lg" style="margin-bottom:5px;">KTP</a> 
+                  <a href="#formkematian" class="btn btn-warning btn-lg" style="margin-bottom:5px;">Surat Ket. Kematian</a> 
+                  <a href="#formkelahiran" class="btn btn-warning btn-lg" style="margin-bottom:5px;">Surat Ket. Kelahiran</a> 
+                  <a href="#formpindah" class="btn btn-warning btn-lg" style="margin-bottom:5px;">Surat Pindah</a> 
+                  <a href="#formperubahan" class="btn btn-warning btn-lg" style="margin-bottom:5px;">Perubahan Data</a> 
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- Modal -->
+          <div style="display: none;" class="modal fade" id="modal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog" >
+              <div class="modal-content modal-content-four" style = "background:#4c6972;">
+                <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+                  <h4 class="modal-title" id="myModalLabel" style="font-family:arial;font-weight:lihter;">Informasi</h4>
+                </div>
+                <div class="modal-body" style="width:100%;">
+                  <div data-dismiss="modal" class="btn btn-success btn-lg" style="margin-bottom:5px;width:100%;">
+					Terimakasih Telah <br> Menggunakan Aplikasi <br> Adm. Kependudukan Kelu<br> rahan Ratusima<br> 
+					<br> 
+					<br> 
+						<div style="text-align:left">Tempat Pengambilan <br> Berkas
+							<ul>
+								<li>07.30-16.00 WIB - Kan <br> tor Kelurahan <br> Ratusima</li>
+								<li>06.30-07.00 WIB - Kan <br> tor FKPM Kelurahan <br> Ratusima</li>
+							</ul>
+							
+						</div>
+				  </div> 
+                </div>
+              </div>
+            </div>
+          </div>
+          <div style="display: none;" class="modal fade" id="modalgagal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog" >
+              <div class="modal-content modal-content-three" style = "background:#4c6972;">
+                <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+                  <h4 class="modal-title" id="myModalLabel" style="font-family:arial;font-weight:lihter;">Informasi</h4>
+                </div>
+                <div class="modal-body" style="width:100%;">
+                  <div data-dismiss="modal" class="btn btn-success btn-lg" style="margin-bottom:5px;width:100%;">
+					Maaf, Pengiriman <br> Data <br> Tidak Berhasil<br> Saat ini<br> 
+					<br> 
+					<br> 
+						<div style="text-align:left">Tempat Pengambilan <br> Berkas
+							<ul>
+								<li>07.30-16.00 WIB - Kan <br> tor Kelurahan <br> Ratusima</li>
+								<li>06.30-07.00 WIB - Kan <br> tor FKPM Kelurahan <br> Ratusima</li>
+							</ul>
+							
+						</div>
+				  </div> 
+                </div>
+              </div>
+            </div>
+          </div>
+		
+		
+<script src="assets/jquery/jquery.min.js" type="text/javascript"></script>
+<script src="assets/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
+<div class="mobirise_engine" style="position: absolute; left: -1000px; top: -1000px; opacity: 0.1;"></div>
+<script src="assets/jquery-parallax/jquery.parallax.js" type="text/javascript"></script>
+<script src="assets/script.js" type="text/javascript"></script>
+
+</body>
+</html>
