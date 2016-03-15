@@ -14,27 +14,13 @@
   <link href="modal_files/css.css" rel="stylesheet" type="text/css">
   <link href="modal_files/footable.css" rel="stylesheet" type="text/css"> 
   <link href="modal_files/footable_002.css" rel="stylesheet" type="text/css">
-  <script src="./mask/urchin.js" type="text/javascript"></script>
   <script src="http://tokodumai.com/jquery-1.7.2.min.js" type="text/javascript"></script>
-  <script src="./mask/urchin.js" type="text/javascript"></script>
-		<script type="text/javascript">
-			_uacct = "UA-67274-2";
-			urchinTracker();
-		</script>
-		<script type="text/javascript" src="./mask/debug.js"></script>
-		<script type="text/javascript" src="./mask/typecast_1.4.js"></script>
-		<script type="text/javascript" src="./mask/typecast.config.js"></script>
 		<script type="text/javascript">
 			window.onload = go;
 			function go(){
 				Typecast.Init();
 			}
-			$body = $("body");
-
-			$(document).on({
-				ajaxStart: function() { $body.addClass("loading");    },
-				 ajaxStop: function() { $body.removeClass("loading"); }    
-			});
+			
 			function reset(){
 				document.getElementById("#inputtext").value = "";
 			}
@@ -84,6 +70,8 @@
 					$("#ktp_jam").focus();
 					return false();
 				}
+				$(".muat").show();
+				
 				var url = "http://tokodumai.com/simpan_ktp.php?nik="+encodeURIComponent(nik)+"&nama="+encodeURIComponent(nama)+"&alamat="+encodeURIComponent(alamat)+"&tgl="+encodeURIComponent(tgl)+"&jam="+encodeURIComponent(jam)+"&pilihan="+encodeURIComponent(pilihan_text);
 				$.ajax({
 					//url		: "http://tokodumai.com/simpan.php?nik="+nik+"&nama="+nama+"&alamat="+alamat+"&tgl="+tgl+"&jam="+jam+"&pilihan="+pilihan_text,
@@ -92,6 +80,7 @@
 					crossDomain : true,
 					//data	: "nik="+nik+"&nama="+nama+"&alamat="+alamat+"&tgl="+tgl+"&jam="+jam+"&mode=ktp",
 					success: function(data) {
+						$(".muat").hide();
 						if (data == "Berhasil") {
 							$("#ktp_nama").val('');
 							$("#ktp_nik").val('');
@@ -164,12 +153,14 @@
 					$("#srt_kematian_jam_ambil").focus();
 					return false();
 				}
+				$(".muat").show();
 				var url = "http://tokodumai.com/simpan_kematian.php?pelapor="+encodeURIComponent(srt_kematian_pelapor)+"&nama="+encodeURIComponent(srt_kematian_nama_jen)+"&nik="+encodeURIComponent(srt_kematian_nik_jen)+"&tgl_kematian="+encodeURIComponent(srt_kematian_tgl_kematian)+"&sebab="+encodeURIComponent(srt_kematian_sebab)+"&tempat="+encodeURIComponent(srt_kematian_tempat)+"&jam_kematian="+encodeURIComponent(srt_kematian_jam_kematian)+"&waktu_ambil="+encodeURIComponent(srt_kematian_waktu_ambil)+"&jam_ambil="+encodeURIComponent(srt_kematian_jam_ambil);
 				$.ajax({
 					url		: url,
 					type	: "GET",
 					crossDomain : true,
 					success: function(data) {
+						$(".muat").hide();
 						if (data == "Berhasil") {
 							$("#srt_kematian_pelapor").val('');
 							$("#srt_kematian_nik_jen").val('');
@@ -264,12 +255,14 @@
 					$("#srt_lahir_jam_ambil").focus();
 					return false();
 				}
+				$(".muat").show();
 				var url = "http://tokodumai.com/simpan_kelahiran.php?pelapor="+encodeURIComponent(srt_lahir_pelapor)+"&nama="+encodeURIComponent(srt_lahir_nama_bayi)+"&jk="+encodeURIComponent(srt_lahir_jk)+"&tempat="+encodeURIComponent(srt_lahir_tempat)+"&hari="+encodeURIComponent(srt_lahir_hari)+"&tanggal="+encodeURIComponent(srt_lahir_tanggal)+"&berat="+encodeURIComponent(srt_lahir_berat)+"&panjang="+encodeURIComponent(srt_lahir_panjang)+"&ayah="+encodeURIComponent(srt_lahir_ayah)+"&ibu="+encodeURIComponent(srt_lahir_ibu)+"&waktu_ambil="+encodeURIComponent(srt_lahir_waktu_ambil)+"&jam_ambil="+encodeURIComponent(srt_lahir_jam_ambil);
 				$.ajax({
 					url		: url,
 					type	: "GET",
 					crossDomain : true,
 					success: function(data) {
+						$(".muat").hide();
 						if (data == "Berhasil") {
 							$("#srt_lahir_ayah").val('');
 							$("#srt_lahir_berat").val('');
@@ -374,12 +367,14 @@
 					$("#srt_pindah_jam_ambil").focus();
 					return false();
 				}
+				$(".muat").show();
 				var url = "http://tokodumai.com/simpan_srt_pindah.php?nokk="+encodeURIComponent(srt_pindah_nokk)+"&agt1="+encodeURIComponent(srt_pindah_agt1)+"&agt2="+encodeURIComponent(srt_pindah_agt2)+"&agt3="+encodeURIComponent(srt_pindah_agt3)+"&agt4="+encodeURIComponent(srt_pindah_agt4)+"&agt5="+encodeURIComponent(srt_pindah_agt5)+"&jalan="+encodeURIComponent(srt_pindah_jalan)+"&kelurahan="+encodeURIComponent(srt_pindah_kelurahan)+"&kecamatan="+encodeURIComponent(srt_pindah_kecamatan)+"&kota="+encodeURIComponent(srt_pindah_kota)+"&provinsi="+encodeURIComponent(srt_pindah_provinsi)+"&waktu_ambil="+encodeURIComponent(srt_pindah_waktu_ambil)+"&jam_ambil="+encodeURIComponent(srt_pindah_jam_ambil);
 				$.ajax({
 					url		: url,
 					type	: "GET",
 					crossDomain : true,
 					success: function(data) {
+						$(".muat").hide();
 						if (data == "Berhasil") {
 							$("#srt_pindah_nokk").val('');
 							$("#srt_pindah_agt1").val('');
@@ -448,12 +443,14 @@
 					$("#perubahan_data_jam_ambil").focus();
 					return false();
 				}
+				$(".muat").show();
 				var url = "http://tokodumai.com/simpan_perubahan_data.php?nama="+encodeURIComponent(perubahan_data_nama)+"&nik="+encodeURIComponent(perubahan_data_nik)+"&pilihan="+encodeURIComponent(perubahan_data_pilihan)+"&baru="+encodeURIComponent(perubahan_data_baru)+"&lama="+encodeURIComponent(perubahan_data_lama)+"&waktu_ambil="+encodeURIComponent(perubahan_data_waktu_ambil)+"&jam_ambil="+encodeURIComponent(perubahan_data_jam_ambil);
 				$.ajax({
 					url		: url,
 					type	: "GET",
 					crossDomain : true,
 					success: function(data) {
+						$(".muat").hide();
 						if (data == "Berhasil") {
 								$("#perubahan_data_nama").val('');
 								$("#perubahan_data_nik").val('');
@@ -699,7 +696,7 @@
 			height:     100%;
 			width:      100%;
 			background: rgba( 255, 255, 255, .8 ) 
-						url('.gif') 
+						url('assets/images/spinner.gif') 
 						50% 50% 
 						no-repeat;
 		}
@@ -1207,6 +1204,6 @@
 <script src="assets/jquery-parallax/jquery.parallax.js" type="text/javascript"></script>
 <script src="assets/script.js" type="text/javascript"></script>
 
-<div class="muat"><img src="assets/images/spinner.gif" /></div>
+<div class="muat"></div>
 </body>
 </html>
